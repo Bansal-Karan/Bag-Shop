@@ -10,6 +10,8 @@ app.use(cookieParser());
 
 app.get('/',(req,res) => {
     res.render("index")
+    console.log("hello");
+    
 })
 
 app.listen(3000)
