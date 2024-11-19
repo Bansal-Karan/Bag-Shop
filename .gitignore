@@ -1,0 +1,55 @@
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.pid
+
+# Ignore node_modules (for Node.js projects)
+node_modules/
+
+# Ignore build directories
+dist/
+build/
+
+# Ignore compiled files
+*.class
+*.o
+*.so
+
+# Ignore Python virtual environments
+venv/
+.env
+*.pyc
+__pycache__/
+
+# Ignore Java dependencies
+*.jar
+*.war
+*.ear
+
+# Ignore IDE/project-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore macOS-specific files
+.AppleDouble
+.LSOverride
+
+# Ignore environment variables and credentials
+.env
+*.env.*
+
+# Ignore backup and archive files
+*.bak
+*.old
+*.swp
+*.tmp
+*.~*
+
+# Ignore other
