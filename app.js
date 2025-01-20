@@ -6,7 +6,9 @@ const userRouts = require("./routers/userRouts");
 const ownerRouts = require("./routers/ownerRouts");
 const productRouts = require("./routers/productRouts");
 
-const db = require("./config/mongoose-connect");
+require("dotenv").config();
+
+const db = require("./config/mongoose-connect"); 
 
 app.set("view engine","ejs");
 app.use(express.json());
@@ -15,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname,"public")));
 
 app.use("/users",userRouts);
-app.use("/owner",ownerRouts);
-app.use("/product",productRouts);
+app.use("/owners",ownerRouts);
+app.use("/products",productRouts);
 
 app.listen(3000)

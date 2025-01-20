@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+const config = require("config");
 
-mongoose.connect('mongodb://127.0.0.1:27017/miniproject')
+const dbgr = require("debug")("development:mongoose");
+
+mongoose.connect(`${config.get("MONGODB_URI")}/miniproject`)
 .then(() =>{
     console.log('Connected');
 }).catch((err) =>{
@@ -8,4 +11,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/miniproject')
     
 })
 
-module.exports = mongoose.connection;
+module.exports = mongoose.connection; 
