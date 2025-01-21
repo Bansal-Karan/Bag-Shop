@@ -5,19 +5,36 @@ const path = require("path");
 const userRouts = require("./routers/userRouts");
 const ownerRouts = require("./routers/ownerRouts");
 const productRouts = require("./routers/productRouts");
+const expressSession = require("express-session");
+const flash = require("connect-flash");
 
 require("dotenv").config();
 
-const db = require("./config/mongoose-connect"); 
+const db = require("./config/mongoose-connection"); 
 
-app.set("view engine","ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(
+    expressSession({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.EXPRESS_SESSION_SECRET,
+    })
+);
+
+app.use(flash());
 app.use(express.static(path.join(__dirname,"public")));
+app.set("view engine","ejs");
 
 app.use("/users",userRouts);
 app.use("/owners",ownerRouts);
 app.use("/products",productRouts);
 
-app.listen(3000)
+app.listen(3000, (err) => {
+    if (err) {
+        console.error("Failed to start server:", err);
+    } else {
+        console.log("Server running on http://localhost:3000");
+    }
+});
