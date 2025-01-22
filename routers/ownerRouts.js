@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const ownerModel = require("../models/ownerModel");
 
-router.get("/", (req, res) => {
-    res.send('hey its working');
+router.get("/admin", (req, res) => {
+    let success = req.flash("Success")
+    res.render("createproducts", {success});
+
 });
 
 router.post("/create", async(req, res) => {

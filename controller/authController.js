@@ -9,7 +9,8 @@ module.exports.registerUser = async (req, res) => {
 
         let user = await userModel.findOne({email: email});
         if(user){
-            return res.status(401).send("You already have an account, please login!");
+         res.status(401).send("You already have an account, please login!");
+         return res.redirect("/");
         }
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -24,7 +25,7 @@ module.exports.registerUser = async (req, res) => {
                     
                     let token = generateToken(user)
                     res.cookie("token", token)
-                    res.send("user created");
+                    res.render("shop");
                 }
             })
         })
@@ -37,16 +38,24 @@ module.exports.loginUser = async (req,res) => {
     let {email, password} = req.body;
 
     let user = await userModel.findOne({email: email});
-    if(!user) return res.send("Email or Password is incorrect!");
+    if(!user){ res.send("Email or Password is incorrect!");
+        return res.redirect("/");
+    }
 
     bcrypt.compare(password, user.password, (err,result) =>{
         if(result){
             let token = generateToken(user);
             res.cookie("token", token);
-            res.send("you can login")
+            res.redirect("/shop")
         }
         else{
             res.send("Email or Password is incorrect!");
+            res.redirect("/");
         }
     });
+}
+
+module.exports.logout = (req,res)=>{
+    res.cookie("token", "");
+    res.redirect("/")
 }
