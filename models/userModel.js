@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const products=require("./productModel")
+const products = require("./productModel")
 const userSchema = mongoose.Schema({
     fullname: String,
     email: String,
