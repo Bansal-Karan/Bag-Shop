@@ -11,14 +11,16 @@
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "serverless-http": "^3.2.0"
   },
   "name": "backendproj",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo 'no build needed'",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
