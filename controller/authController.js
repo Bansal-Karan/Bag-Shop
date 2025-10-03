@@ -3,6 +3,7 @@ const ownerModel = require("../models/ownerModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {generateToken} = require("../utils/generateTokens"); 
+const productModel = require("../models/productModel");
 
 module.exports.registerOwner = async (req, res) => {
     try {
@@ -27,8 +28,12 @@ module.exports.registerOwner = async (req, res) => {
                     });
                     
                     let token = generateToken(owner)
+                    let products = await productModel.find();
                     res.cookie("token", token)
-                    res.render("shop");
+                    res.render("shop", { 
+                        success: "Admin account created successfully!",
+                        products: products,
+                    });
                 }
             })
         })
@@ -79,8 +84,9 @@ module.exports.registerUser = async (req, res) => {
                     });
                     
                     let token = generateToken(user)
+                    let products = await productModel.find();
                     res.cookie("token", token)
-                    res.render("shop");
+                    res.redirect("/shop");                     
                 }
             })
         })

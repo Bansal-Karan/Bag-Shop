@@ -4,13 +4,13 @@ const isLoggedin = require("../middlewares/isLoggedIn");
 const productModel = require("../models/productModel");
 const userModel = require("../models/userModel");
 
-router.get("/",(req,res) => {
-    res.render("index")
+router.get("/", (req, res) => {
+    res.render("index");
 });
 
-router.get("/owner", (req,res) => {
-    res.render("owner-login")
-})
+router.get("/owner", (req, res) => {
+    res.render("owner-login");
+});
 
 router.get("/user", (req, res) => {
     let error = req.flash("error");
@@ -20,14 +20,14 @@ router.get("/user", (req, res) => {
 router.get("/admin", isLoggedin, async function (req, res) {
     let products = await productModel.find();
     let success = req.flash("success");
-    res.render("admin", { success });
+    res.render("admin", { success, products });
 });
 
-router.get("/createproduct", async (req,res) => {
+router.get("/createproduct", async (req, res) => {
     let products = await productModel.find();
     let success = req.flash("success");
-    res.render("createproducts", {success});
-})
+    res.render("createproducts", { success });
+});
 
 router.get("/shop", isLoggedin, async function (req, res) {
     let products = await productModel.find();
@@ -44,14 +44,11 @@ router.get("/cart", isLoggedin, async function (req, res) {
     }
 
     const bill = Number(user.cart[0].price) + 20 - Number(user.cart[0].discount);
-
     res.render("cart", { user, bill });
 });
 
 router.get("/addtocart/:productid", isLoggedin, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
-    console.log(req.params.productid);
-    
     user.cart.push(req.params.productid);
     await user.save();
     req.flash("success", "Added to cart");
