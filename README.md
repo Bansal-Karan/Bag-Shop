@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/25620798/README.md)
 # 👜 Bag Shop --- Role-Based E-Commerce Web Application
 
 ## 📌 Overview
